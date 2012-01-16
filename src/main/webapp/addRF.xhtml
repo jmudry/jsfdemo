@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<h:form id="personForm">
+		<rich:panel>
+			<f:facet name="header">
+                <h:panelGroup>
+                    <h:outputText value="User information" />
+                    <a4j:status>
+                    <f:facet name="start">
+                        <h:graphicImage value="/images/ai.gif" alt="ai" style="height:12px;width:12px;"/>
+                    </f:facet>
+                </a4j:status>
+                </h:panelGroup>
+            </f:facet>
+            
+			<h:panelGrid columns="3">
+			
+				<h:outputText value="#{msg.personFirstNameLabel}" />
+				<h:inputText id="firstName" value="#{personBean.person.firstName}"
+					required="#{true}" validator="#{personBean.validatePerson}" >
+					<f:validator validatorId="CzyIstniejeOsoba" /> 
+					<f:validateLength minimum="2" maximum="25" message="Imie powinno mieć długość od 2 do 25 znaków"/>		
+					<rich:validator />	 
+				</h:inputText>
+				<rich:message for="firstName" showDetail="#{true}"
+					showSummary="#{false}"/>
+
+				<h:outputText value="#{msg.personPinLabel}" />
+				<h:inputText id="pin" value="#{personBean.person.pin}" 
+					validator="#{personBean.uniquePin}" required="#{true}">
+					<f:validator validatorId="pinValidator" />
+					<rich:validator />	 
+				</h:inputText>
+				<rich:message for="pin" showDetail="#{true}"
+					showSummary="#{false}"/>
+
+				<h:outputText value="#{msg.personDobLabel}" />
+
+				<rich:calendar value="#{personBean.person.dateOfBirth}"
+					id="calendar" datePattern="dd.MM.yyyy" showApplyButton="#{true}"
+					cellWidth="24px" cellHeight="22px" style="width:200px">
+					<rich:validator />	
+					<f:convertDateTime type="date" pattern="dd.MM.yyyy" />
+				</rich:calendar>
+				<rich:message for="calendar" showDetail="#{true}"
+					showSummary="#{false}"/>
+				
+				<h:outputText value="#{msg.personZipCodeLabel}" />
+				<h:inputText id="zipCode" value="#{personBean.person.zipCode}" >
+					<rich:validator />	 
+				</h:inputText>
+				<rich:message for="zipCode" showDetail="#{true}"
+					showSummary="#{false}"/>
+				
+				<h:outputText value="#{msg.personWeightLabel}" />
+				<rich:inputNumberSlider id="weight"  value="#{personBean.person.weight}" width="50" minValue="20.5" maxValue="300"
+        			step="0.5" showArrows="true" showTooltip="true" >					
+					<rich:validator />	
+				</rich:inputNumberSlider>
+				<rich:message for="weight" showDetail="#{true}"
+					showSummary="#{false}"/>
+				
+				<h:outputText value="#{msg.personNumOfChildrenLabel}" />
+				 <rich:inputNumberSpinner id="numOfChildren" value="#{personBean.person.numOfChildren}" step="1" maxValue="20"/>
+				<rich:message for="numOfChildren" showDetail="#{true}"
+					showSummary="#{false}"/>
+				
+			</h:panelGrid>
+			
+			<h:commandButton value="#{msg.personFormOKButton}"
+				action="#{personBean.addPerson}" />
+			
+			<h:panelGrid>
+				<h:messages id="messages" showDetail="#{true}"
+					showSummary="#{false}" />
+			</h:panelGrid>
+			
+			</rich:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

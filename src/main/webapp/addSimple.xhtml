@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+	<ui:define name="content">
+		<h:form id="personform">
+			<h:panelGrid columns="2">
+
+				<h:outputText value="#{msg.personFirstNameLabel}" />
+				<h:inputText id="fistName" value="#{personBean.person.firstName}"  
+					required="true" validator="#{personBean.validatePerson}" >
+				<f:validator validatorId="CzyIstniejeOsoba" />
+				<f:validateLength minimum="2" maximum="25" message="Imie powinno mieć długość od 2 do 25 znaków"/>
+				</h:inputText>
+				
+				<h:outputText value="#{msg.personPinLabel}" />
+				<h:inputText id="pin" value="#{personBean.person.pin}" required="true" />
+
+				<h:outputText value="#{msg.personDobLabel}" />
+				<h:inputText id="dateOfBirth" value="#{personBean.person.dateOfBirth}">
+				  <f:convertDateTime type="date" pattern="dd.MM.yyyy" />
+				</h:inputText>
+
+				<h:outputText value="#{msg.personZipCodeLabel}" />
+				<h:inputText id="zipCode" value="#{personBean.person.zipCode}" />
+
+				<h:outputText value="#{msg.personWeightLabel}" />
+				<h:inputText id="weight" value="#{personBean.person.weight}">
+				</h:inputText>
+				
+				<h:outputText value="#{msg.personNumOfChildrenLabel}" />
+				<h:inputText id="numOfChildren" value="#{personBean.person.numOfChildren}" />
+				
+				<h:outputText value="#{msg.personMarriedLabel}" />
+				<h:selectBooleanCheckbox id="married" value="#{personBean.person.married}" />
+			
+			</h:panelGrid>
+
+			<h:commandButton value="#{msg.personFormOKButton}"
+				action="#{personBean.addPerson}" />
+				
+			<h:panelGrid>
+				<h:messages showDetail="#{true}" showSummary="#{false}" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

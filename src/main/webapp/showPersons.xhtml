@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	
+	<ui:define name="content">
+	
+    <h:form>
+    
+     <h:dataTable value="#{personBean.allPersons}" var="item" rowClasses="odd-row, even-row" styleClass="stable personsTable" >
+      
+      <h:column>
+        <f:facet name="header">#{msg.personFirstNameLabel}</f:facet>
+        #{item.firstName}
+      </h:column>
+      
+      <h:column>
+        <f:facet name="header">#{msg.personPinLabel}</f:facet>
+        #{item.pin}
+      </h:column>
+      
+       
+      
+       <h:column>
+        <f:facet name="header">#{msg.personZipCodeLabel}</f:facet>
+        #{item.zipCode}
+      </h:column>
+      
+       <h:column>
+        <f:facet name="header">#{msg.personWeightLabel}</f:facet>
+        #{item.weight}
+      </h:column>
+      
+      <h:column>
+        <f:facet name="header">#{msg.personNumOfChildrenLabel}</f:facet>
+        #{item.numOfChildren}
+      </h:column>
+      <h:column>
+        <f:facet name="header">#{msg.personMarriedLabel}</f:facet>
+        #{item.married}
+      </h:column>
+      
+      <h:column>
+        <f:facet name="header">#{msg.action}</f:facet>
+        <h:commandLink class="delete"  action="#{personBean.deletePerson}" >
+         <h:graphicImage value="/images/icons/delete.gif" alt="delete" />
+        </h:commandLink> 
+        <h:commandLink  action="#{personBean.editPerson}">
+     	<h:graphicImage value="/images/icons/edit.gif" alt="edit" />
+        </h:commandLink>
+      </h:column>
+      
+      
+     </h:dataTable>
+    </h:form>
+    <rich:jQuery selector=".stable tr:odd" query="addClass('odd-row')" />
+    <rich:jQuery selector=".stable tr:even" query="addClass('even-row')" />
+    <rich:jQuery selector=".stable tr" event="mouseover"
+        query="jQuery(this).addClass('active-row')"/>
+    <rich:jQuery selector=".stable tr" event="mouseout"
+        query="jQuery(this).removeClass('active-row')"/>
+      
+	</ui:define>
+	
+	
+	
+</ui:composition>

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+<f:view locale="#{language.locale}">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
+	<title><ui:insert name="windowTitle">#{msg.mainWindowTitle}</ui:insert></title>
+	<h:outputStylesheet library="css" name="default.css" target="body" />
+</h:head>
+
+
+
+<h:body>
+	<div id="wrapper">
+		<div id="header"></div>
+		<div id="nav">	
+			<h1>
+			  <ui:insert name="heading">
+      			 #{msg.mainHeading}
+    		 </ui:insert>
+			</h1>
+			<h:form>
+				<h:commandLink action="#{language.changeLanguage('pl')}" value="#{msg.langPL}"/> | 
+				<h:commandLink action="#{language.changeLanguage('en')}" value="#{msg.langENG}"/>
+			</h:form>	
+		</div>
+		
+		<div id="main">
+			<div id="sidebar">
+				<ui:insert name="menu">
+         		<ui:include src="/views/main/menu.xhtml" />
+       			</ui:insert>	
+       		</div>	
+		
+			
+			<div id="content">
+				<h1><ui:insert name="header" /></h1>
+	    		<ui:insert name="content" />
+			</div>	
+		</div>	
+		
+		<div id="footer">	
+				<p>Copyright by: jairek</p>
+		</div>		
+	</div>
+</h:body>
+</f:view>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
